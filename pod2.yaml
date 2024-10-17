@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-arg
+spec:
+  containers:
+  - name: command-arg-container
+  - image: busybox

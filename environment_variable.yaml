@@ -1,0 +1,24 @@
+#ortama göre degisen hassa verileri konteynir imajlarina göömeden disarda tanimlayarak kullanabiliriz. 
+#env: baslik altinda burda degerlerimizi atabiliriz.
+#enviroment bilgilerini ögrenmek icin docker dokumantasyona gidip ögrenebiliriz.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podenviroment
+spec:
+  containers:
+  - name: env-mysql-demo
+    image: mysql:5.6
+    env:
+    - name: MYSQL_USER
+      value: "admin"
+    - name: MYSQL_DATABASE
+      value: "test-db"
+    - name: MYSQL_ROOT_PASSWORD
+      value: "onetwothree!"
+    - name: MYSQL_HOST
+      value: "mysql-service"
+    - name: MYSQL_TCP_PORT
+      value: "3306"
+    ports:
+    - containerPort: 3306

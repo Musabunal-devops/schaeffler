@@ -1,0 +1,19 @@
+#Annotation lar kübernetes nesneleri üzerinde ek acikalamalar yapmak icin kullanilmaktadir.Burada girilien degerler kübernetes in umrunda degildir.
+#kübernetis üzerinde projenizi okuyacak kisilere ek bilgiler vermek isterseniz örnegin proje sahibi ,mail adresi veya kaynak bilgielri gibi tanimlarmar Annotation kavrami ile yapilmaktadir.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-annotation
+  annotations:
+    owner: "Musab Ünal"
+    email: "unalmusabumeyir@gmail.com"
+    releasedate: "01.01.2022"
+    oncallPager: 111-222-3333
+    imageregistry: "https://hub.docker.com"
+    kbArticle: "https://kb.docs.example.com/KB123456"
+spec:
+  containers:
+  - name: container
+    image: nginx
+    ports:
+    - containerPort: 80

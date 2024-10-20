@@ -1,0 +1,29 @@
+#olusturmak istedigimiz podu sectigimiz node uzerinde olusturman en kolay yönü node selectördü.
+#Yalniz daha karmasik yapilarda kullanmak istiyorsak bunun icin Affinitye ihtiyacimiz var.
+#Affinity e ikiye ayrilir : Node affinity ve Pod affinity dir
+#Node affinity uzerinde iki farkli tercih durumu bulunur. Bunlar hard type ve soft type dir.
+#Hard type modelinde , talep edilen label yani etiket bilgisi node üzerinde kesinkez olmak zorundadir.
+#Soft type soft type modelinde ise talep edilen etikete sahip bir node olusturur yoksa uygun olan diger nodelarin uzrinde olusturur.
+# requiredDuringSchedulingIgnoredDuringExecution
+# requiredDuringSchedulingIgnoredDuringExecution
+#ignore ifadesi node caldirildiktan sonra pod larin calismaya devam etmesini saglar.
+#required ise label kaldirildiginda node uzerindeki podlari sil anlamina gelir.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity
+spec:
+  containers:
+  - name: affinity-c1
+    image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/e2e-az-istanbul
+            operator: In
+            values:
+            - e2e-az1
+            - e2e-az2
+            - e2e-az3

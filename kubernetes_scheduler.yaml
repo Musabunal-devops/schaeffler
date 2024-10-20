@@ -1,0 +1,25 @@
+#kubernetes scheduler in görevi hangi podun hangi node a bagli oldugunu belirlemektir
+#küberneses scheduler node secme yöntemleri iki tanedir Flitering and Scoring
+#kubernetes scheduler i node secimi icin üc farkl yöntem kullanir ,bunlar:
+#Node Selector
+#Affinity
+#Taint ve Toleration
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-mysql
+  labels:
+    name: label-mysql
+spec:
+  nodeSelector:
+    disktype: ssd
+  containers:
+  - name: mysqldb
+    image: mysql:5.6
+    env:
+     - name: MYSQL_ROOT_PASSWORD
+       value: onetwothreeS
+    ports:
+      - name: mysql-port
+        containerPort: 3306
+

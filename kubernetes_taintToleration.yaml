@@ -1,0 +1,34 @@
+#taint ve toleration nodelarin sadece belirli bir pod grubuna hizmet vermesini saglar.
+#pod lara ve nodelara toleration veriliyor ve bunlar eslesince pod node calsiiybiliyor.
+#burda yapmamiz gerekenler öncelikle kubectl taint nodes <node name><key=value>:Taint_effect 
+#daha sonra node a da ayni key value eklenmeli.
+#bu islemler yapildiktan sonra pod key values si eslesen node da olusturalabilir.
+#ve spec bölümde tolerations diye kisim acilir
+#taint yazarken effect kismi vardir
+#bunlar üce ayrilir -NoSchedule -PreferNoSchedule -NoExecute
+apiVersion: v1
+kind: Pod
+metadata:
+  name: toleratedpod1
+spec:
+  containers:
+  - name: toleratedcntr1
+    image: nginx:1.16-alpine
+  tolerations:
+  - key: "dedicated"
+    operator: "Equal"
+    value: "web"
+    effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: toleratedpod2
+spec:
+  containers:
+  - name: toleratedcntr2
+    image: nginx:1.16-alpine
+  tolerations:
+  - key: "dedicated"
+    operator: "Exists"
+    effect: "NoSchedule"

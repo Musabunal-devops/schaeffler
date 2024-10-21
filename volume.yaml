@@ -1,0 +1,28 @@
+#volume ler podlar yokkoldugunda bilgilerin silinmmemsini sagliyor bir nevi back up gibi 
+# volumelar ikiye ayrilir bunlar Persistent Volume ve Persistent Volume claim denir.
+#PV kalici depolama alanidir
+#emtydirvolume nedir
+#pod olusuturulurken ortak bir cashe dosyasi olustuurlur. Podlar buradan olustutlurken bilgiler ceker
+#kisitli memory sahip ve cache kullanimi yapan uygulamalariniz varsa yada pod üzerinde coklu
+#konteynirlar arasinda dosya paylasimi yapmak isterseniz emptrydir, volume bunun icin oldukca kullanislidir.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume-emptdir
+spec:
+  containers:
+    - name: c1
+      image: busybox
+      command: ['sleep', '5000']
+      volumeMounts:
+      - name: cache-volume
+        mountPath: /cache
+    - name: c2
+      image: busybox
+      command: ['sleep', '5000']
+      volumeMounts:
+      - name: cache-volume
+        mountPath: /cache
+volumes:
+ - name: cache-volume
+   emptyDir: {}

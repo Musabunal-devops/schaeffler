@@ -1,11 +1,15 @@
 apiVersion: v1
-kind: Pod
+pod: Kind
 metadata:
-  name: command-sleep-1
+  name: mypod
 spec:
   containers:
-  - name: alpine-container
-    image: alpine:3.9
-    command:
-      - "sleep"
-      - "3600"
+  - name: mypod
+    image: kubernetes/pause
+    volumeMounts:
+    - mountPath: "/mnt/azure"
+      name: volume
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: azure-managed-disk 

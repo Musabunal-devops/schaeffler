@@ -19,4 +19,3 @@ spec:
     - name: mysql-volume
       persistentVolumeClaim:
         claimName: pervolume001-mysql-claim
-        

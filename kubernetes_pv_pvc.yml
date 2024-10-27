@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pv001-mysql-pod
+  labels:
+    app: mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:latest
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: onetworthree123
+    ports:
+    - name: mysql
+      contianerPort: 3306
+      protocol: TCP
+    volumeMounts:
+    - name: mysql-volume
+      persistentVolumeClaim:
+        claimName: pervolume001-mysql-claim
+        

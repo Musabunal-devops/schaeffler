@@ -1,0 +1,25 @@
+ #clusterdaki bilgilerin saklanmasi icin clusterin disinda bir yerde depolamamiz daha iyi olacaktir. 
+ #bunun icin storage kullaniyoruz.
+ #NAS ve SAN
+#SAN, yüksek performanslı bir veri depolama ağıdır ve genellikle büyük ölçekli işletmelerde kullanılır. SAN, sunucuların, veri depolama cihazlarına doğrudan erişmesine olanak tanıyan özel bir ağ sağlar. Bu yapı, veriye hızlı ve güvenilir erişim sunarak yüksek miktarda veri işlemesine olanak tanır.
+#NAS, bir ağa bağlı olarak çalışan, verilerin dosya düzeyinde paylaşıldığı bir depolama çözümüdür. NAS cihazları genellikle ev kullanıcıları ve küçük-orta ölçekli işletmeler için ideal bir çözüm sunar.
+#PV nin olusma sürsei 4 asamadan olusur.
+#Provisioning burda stograge ait bazi seylerin tanimlanmasi yapilir.
+#Binding alan talep etmey islenine denir. Ve bunun adina pvc denir
+#Using tanimladigimiz volume pod uzerine baglanr ve pvc uzerinden yönetilir buna using denir.
+#Reclaiming, Pod islemi tammalanip silinmesi islemine reclaiming denir.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+   name: pervolume001
+   labels:
+    type: pv001 
+spec:
+  capacity:
+    storage: 2
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  hostPath:
+    path: "/mnt/data"

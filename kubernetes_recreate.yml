@@ -1,0 +1,29 @@
+#bu uygulamamzin yeni versiyonun omageni güncellemek icin kullanacagimiz koddur.
+#kubectl set image deployment/nginx-deployment nginx-container=nginx:1.16.1
+#kubectl rollout status deployment/nginx-deployment komutu ile güncelleme durumunu takip edriz
+#guncel versiyon image görüntülerine bakabiliz.kubectl rollout history deployment/nginx-deployment
+#kubectl rollout undo bu kod ile eski versiyona döner.Kubectl rollout undo --to-revision=1 kodu ile versiyonlar arasi gecis yaparsin
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:1.15.1
+        ports:
+        - containerPort: 80

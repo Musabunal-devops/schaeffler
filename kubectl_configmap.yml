@@ -1,0 +1,14 @@
+#configmap uygulamizda kullandigimiz configurasyon datalarini merkezi bir noktadan yönetmemizi saglayan bir kübernetes objesidir
+#Bunlardan ilki iceriklerin enviermant variable yani ortam degiskeni olarak tanimlanmasidir.
+#bir digeri ise belirledigimz path üzerine configmap iceriklerinin mount edilmesi ve kullanilmasi seklindedir.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  db_host: "db.domain.com"
+  database: "mydatabase"
+  ui.properties:
+    color.good=purple
+    color.bad=yellow
+    allow.textmode=true
